@@ -1,0 +1,39 @@
+{
+  "name": "koa-prisma",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf ./dist",
+    "build-alias": "tsc-alias",
+    "admin": "node -r dotenv/config ./dist/admin",
+    "server": "node -r dotenv/config ./dist/index",
+    "combined": "cross-env NODE_ENV=development run-s build-alias server",
+    "dev": "npm run clean && tsc-watch --noClear --onSuccess 'yarn combined'"
+  },
+  "dependencies": {
+    "@adminjs/koa": "^3.0.1",
+    "@adminjs/prisma": "^3.0.1",
+    "@koa/router": "^12.0.0",
+    "@prisma/client": "^4.4.0",
+    "adminjs": "^6.2.4",
+    "koa": "^2.13.4",
+    "koa-body": "^5.0.0",
+    "koa-logger": "^3.2.1",
+    "koa2-formidable": "^1.0.3"
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.2",
+    "@types/koa-logger": "^3.1.2",
+    "@types/koa__router": "^12.0.0",
+    "@types/node": "^17.0.41",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.1",
+    "npm-run-all": "^4.1.5",
+    "prisma": "^4.4.0",
+    "rimraf": "^3.0.2",
+    "tsc-alias": "^1.6.9",
+    "tsc-watch": "^5.0.3",
+    "typescript": "^4.7.3"
+  }
+}

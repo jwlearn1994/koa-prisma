@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  // default is in node_modules/.prisma/client
+  // output to src to controled by git
+  // output   = "../src/generated/client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Office {
+  id       Int       @id @default(autoincrement())
+  name     String
+  teachers Teacher[]
+}
+
+model Lesson {
+  id       Int       @id @default(autoincrement())
+  name     String
+  teachers Teacher[]
+}
+
+model Teacher {
+  id       Int      @id @default(autoincrement())
+  name     String
+  Office   Office?  @relation(fields: [officeId], references: [id])
+  officeId Int?
+  lessons  Lesson[]
+}
+
+// this model can be auto generated or manual created if already mention the relations between two model, prisma will auto generate the middle table for us
+// model TeacherOnLessons {
+//   id        Int     @id @default(autoincrement())
+//   teacher   Teacher @relation(fields: [teacherId], references: [id])
+//   lesson    Lesson  @relation(fields: [lessonId], references: [id])
+//   teacherId Int
+//   lessonId  Int
+// }
